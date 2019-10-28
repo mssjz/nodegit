@@ -142,7 +142,7 @@ void GitClone::CloneWorker::HandleOKCallback() {
       if (baton->error->message) {
         err = Nan::To<v8::Object>(Nan::Error(baton->error->message)).ToLocalChecked();
       } else {
-        err = Nan::To<v8::Object>(Nan::Error("Method clone has thrown an error.")).ToLocalChecked();
+        err = Nan::To<v8::Object>(Nan::Error("Method clone has thrown an error in handle ok callback.")).ToLocalChecked();
       }
       Nan::Set(err, Nan::New("errno").ToLocalChecked(), Nan::New(baton->error_code));
       Nan::Set(err, Nan::New("errorFunction").ToLocalChecked(),
@@ -194,7 +194,7 @@ void GitClone::CloneWorker::HandleOKCallback() {
 
       if (!callbackFired) {
         v8::Local<v8::Object> err =
-            Nan::To<v8::Object>(Nan::Error("Method clone has thrown an error.")).ToLocalChecked();
+            Nan::To<v8::Object>(Nan::Error("Method clone has thrown an error in callback not fired.")).ToLocalChecked();
         Nan::Set(err, Nan::New("errno").ToLocalChecked(),
                  Nan::New(baton->error_code));
         Nan::Set(err, Nan::New("errorFunction").ToLocalChecked(),
